@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Speed Dating</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div style="text-align: center;">
+        <div style="position: relative;">
+            <img src="https://storage.googleapis.com/kaggle-datasets-images/35/54/db837721caa77b658b81e24d97544dba/dataset-cover.jpg">
+            <div style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); color: white; background: rgba(0, 0, 0, 0.2); ">
+                <h1>Speed Dating</h1>
+                <h2>What attributes influence the selection of a romantic partner?</h2>
+            </div>
+        </div>
+        Attractiveness: <br />
+        <input id="attr" type="number" min="1" max="10" /><br />
+        Sincerity: <br />
+        <input id="sinc" type="number" min="1" max="10" /><br />
+        Intelligence: <br />
+        <input id="intel" type="number" min="1" max="10" /><br />
+        Fun: <br />
+        <input id="fun" type="number" min="1" max="10" /><br />
+        Ambition: <br />
+        <input id="amb" type="number" min="1" max="10" /><br />
+        Shared Interest: <br />
+        <input id="shar" type="number" min="1" max="10" /><br /><br />
+        <input id="submit" class="btn btn-primary" type="submit" value="Submit"><br /><br />
+        <h2 id="answer"></h2>
+    </div>
+  </body>
+  <script>
+    document.getElementById("submit").addEventListener(
+      "click",
+      function(){
+        bound = function(x){
+          if (x > 10){ return 10; }
+          else if (x < 1){ return 1}
+          else return x;
+        }
+        var attr =  bound(document.getElementById("attr").value);
+        var sinc =  bound(document.getElementById("sinc").value);
+        var intel = bound(document.getElementById("intel").value);
+        var fun =   bound(document.getElementById("fun").value);
+        var amb =   bound(document.getElementById("amb").value);
+        var shar =  bound(document.getElementById("shar").value);
+        lm = 0.40257*attr - 0.08568*sinc + 0.12508*intel + 0.27550*fun - 0.16530*amb + 0.27006*shar - 5.55073
+        pct = 1/(1 + Math.pow(2.71828, -1*lm))
+        document.getElementById("answer").innerText = pct.toFixed(2)
+      }
+    )
+  </script>
+</html>
